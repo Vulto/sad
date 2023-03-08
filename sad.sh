@@ -10,23 +10,23 @@ fi
 mime=$(xdg-mime query filetype "$1")
 
 # List all programs in /usr/local/bin and /usr/bin
-programs=$(find /usr/local/bin /usr/bin -type f -perm -u+x | xargs -n1 basename)
+ProgList=$(find /usr/local/bin /usr/bin -type f -perm -u+x | xargs -n1 basename)
 
 # Use fzf to present a list of programs to the user
-program=$(echo "$programs" | fzf --height=40%)
+Prog=$(echo "$Prog" | fzf --height=40%)
 
 # Check if the selected program has a .desktop file
 if [ ! -f "/usr/share/applications/${program}.desktop" ]; then
   # Create a .desktop file for the selected program
   echo "[Desktop Entry]
-Name=${program}
-Exec=${program} %U
+Name=${Prog}
+Exec=${Prog} %U
 Type=Application
 Terminal=false
 Categories=Utility;
-" > "/usr/share/applications/${program}.desktop"
+" > "/usr/share/applications/${Prog}.desktop"
 fi
 
 # Set the selected program as the default for the mime type
-xdg-mime default "${program}.desktop" $mime
-echo "Default application for $mime set to $program"
+xdg-mime default "${Prog}.desktop" $mime
+echo "Default application for $mime set to $Prog"
