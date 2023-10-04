@@ -1,4 +1,7 @@
 # sad
-Wrapper for xdg default applications 
 
+## Wrapper for xdg default applications 
 It set default application for a given file.
+
+# Dependencies
+fzf, xdg-utils
